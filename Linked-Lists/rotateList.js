@@ -1,14 +1,29 @@
 function rotateRight(head, k) {
-  let len = head.length;
-  let rotate = k % len;
-  let empty = [];
-  //   while (rotate) {
-  //     empty[len - 1] = head[len - 1];
-  //     console.log(k % len, rotate);
-  //     rotate--;
-  //   }
-  const f = [...head.slice(rotate)];
-  console.log(head.slice(rotate));
+  if (!head || !head.next || k === 0) return head;
+  let s = head;
+  let f = head;
+
+  let length = 0;
+  let curr = head;
+  while (curr) {
+    curr = curr.next;
+    length++;
+  }
+
+  k = k % length;
+  for (let i = 0; i < k; i++) {
+    f = f.next;
+  }
+
+  while (f.next) {
+    s = s.next;
+    f = f.next;
+  }
+
+  f.next = head;
+  let newHead = s.next;
+  s.next = null;
+  return newHead;
 }
 
 // let output = [2,0,1];
