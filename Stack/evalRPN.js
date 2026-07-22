@@ -1,0 +1,16 @@
+const evalRPN = (arr) => {
+  let stack = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (["*", "-", "+", "/"].includes(arr[i])) {
+      let a = stack.pop();
+      let b = stack.pop();
+      let ans = eval(`${b} ${arr[i]} ${a}`);
+      stack.push(Math.trunc(ans));
+    } else {
+      stack.push(arr[i]);
+    }
+  }
+  return Number(stack.pop());
+};
+let tokens = ["2", "1", "+", "3", "*"];
+console.log(evalRPN(tokens));
